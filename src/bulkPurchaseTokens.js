@@ -55,7 +55,9 @@ async function bulkPurchaseTokens(keypair, marketIDs, tokenAmounts) { // Added t
       
         const versionedTransaction = new VersionedTransaction(transactionMessage);  // overcomes need for .add transactions
         versionedTransaction.sign(keypair);
-      
+
+        // ACTUAL transactions sent - commented out
+        /*
         try {
           const signature = await sendAndConfirmTransaction(
             connection,
@@ -67,6 +69,7 @@ async function bulkPurchaseTokens(keypair, marketIDs, tokenAmounts) { // Added t
         } catch (error) {
           console.error('Transaction failed:', error);
         }
+        */
         transactions.push(versionedTransaction); // Add transaction to array
         messageInstructions.length = 0; // Clear instructions after sending
       }

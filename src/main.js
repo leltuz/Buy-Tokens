@@ -21,4 +21,4 @@ const marketIDs = ["J4fQTRN13MKpXhVE74t99msKJLbrjegjEgLBnzEv2YH1",
 "Ez4bst5qu5uqX3AntYWUdafw9XvtFeJ3gugytKKbSJso"];
 
 // Execute bulk purchase
-bulkPurchaseTokens(wallet, marketIDs);
+const transactions = await bulkPurchaseTokens(wallet, marketIDs);

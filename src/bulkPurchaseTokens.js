@@ -7,7 +7,8 @@ async function bulkPurchaseTokens(keypair, marketIDs, tokenAmounts) { // Added t
   try {
     const blockhash = await connection.getLatestBlockhash('finalized');
     const messageInstructions = [];
-    let transactionCap = 0; // Initialize transactionCap
+    const transactions = []; // to hold versioned transactions
+    let transactionCap = 0; // to divide up inner transactions
 
     for (let i = 0; i < marketIDs.length; i++) {
       const marketID = marketIDs[i];
@@ -66,8 +67,10 @@ async function bulkPurchaseTokens(keypair, marketIDs, tokenAmounts) { // Added t
         } catch (error) {
           console.error('Transaction failed:', error);
         }
+        transactions.push(versionedTransaction); // Add transaction to array
         messageInstructions.length = 0; // Clear instructions after sending
       }
+      return transactions;  // array of versioned transations, 4 instructions each
     }
   } catch (error) {
     console.error('Error performing bulk purchase:', error);
